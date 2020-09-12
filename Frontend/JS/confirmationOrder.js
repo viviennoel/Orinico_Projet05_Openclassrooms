@@ -5,8 +5,10 @@ confirmationOrder();
 function confirmationOrder() {
     let ConfirmOrder = JSON.parse(window.localStorage.getItem('ConfirmedOrders'));
     let latestorder = ConfirmOrder.length - 1;
-    console.log(latestorder);
-
+    
+    let confirmId = ConfirmOrder[latestorder].orderId;
+    document.getElementById('orderId').innerHTML = confirmId;
+    
     var TotalPrice = 0;
 
     let HTMLProductlist = "";
