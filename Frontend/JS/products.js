@@ -5,7 +5,7 @@
 DisplayProductList();
 
 function displayProductList() {
-    fetch('http://localhost:3000/api/cameras').then(response => response.json()).then(response => CreateProductList(response))
+    fetch('http://localhost:3000/api/cameras').then(response => response.json()).then(response => createProductList(response))
         .catch(function (error) {
             console.log('there was a problem with the fetch : ' + error.message)
         })
@@ -13,7 +13,7 @@ function displayProductList() {
 
 //CREER UN TABLEAU DE TOUTES LES CARACTERISTIQUE APPELLÉE "PRODUCTLIST"
 
-function CreateProductList(json) {
+function createProductList(json) {
 
     const productList = [];
     for (let i = 0; i < json.length; i++) {
