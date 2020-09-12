@@ -4,8 +4,8 @@
 
 DisplayProductList();
 
-function DisplayProductList() {
-    fetch('http://localhost:3000/api/cameras').then(response => response.json()).then(response => productlist(response))
+function displayProductList() {
+    fetch('http://localhost:3000/api/cameras').then(response => response.json()).then(response => CreateProductList(response))
         .catch(function (error) {
             console.log('there was a problem with the fetch : ' + error.message)
         })
@@ -13,23 +13,23 @@ function DisplayProductList() {
 
 //CREER UN TABLEAU DE TOUTES LES CARACTERISTIQUE APPELLÉE "PRODUCTLIST"
 
-function productlist(json) {
+function CreateProductList(json) {
 
-    var productlist = [];
+    const productList = [];
     for (let i = 0; i < json.length; i++) {
-        productlist.push(new Product(json[i]._id, json[i].name, json[i].price, json[i].description, json[i].imageUrl))
+        productList.push(new Product(json[i]._id, json[i].name, json[i].price, json[i].description, json[i].imageUrl))
     }
 
-    insertlisthtml(productlist);
+    insertlisthtml(productList);
 }
 
 //AFFICHER LES PRODUITS A L'AIDE DE INNERHTML
 
-function insertlisthtml(productlist) {
-    let HTMLProductlist = "";
+function insertListHtml(productList) {
+    let HtmlProductList = "";
     
-    productlist.forEach(Product => {
-        HTMLProductlist += `<div class="productlist">
+    productList.forEach(Product => {
+        HtmlProductList += `<div class="productlist">
                 <h2>${Product.name}</h2>
                 <p class="text-center">${Product.description}</p>
                 <p class="priceproductslist">Price of the article: ${Product.price / 100 + '.' + Product.price % 100}</p>
@@ -44,8 +44,7 @@ function insertlisthtml(productlist) {
 //QUERY PARAMETERS
 
 function getqueryParams(Productid) {
-    let queryParams = new URLSearchParams(window.location.search);
-    console.log(Productid);
+    const queryParams = new URLSearchParams(window.location.search);
     queryParams.set("id", Productid);
     history.pushState(null, null, "?" + queryParams.toString());
     window.location.replace("productDetail.html" + "?" + queryParams.toString());
