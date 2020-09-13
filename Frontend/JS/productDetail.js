@@ -28,11 +28,17 @@ function detailofproduct(Product) {
 let HTMLProductlist = `<div class="productlist">
         <h2>${Product.name}</h2>
         <p class="text-center">${Product.description}</p>
-        <p class="priceproductslist">Price of the article: ${Product.price / 100 + '.' + Product.price % 100}</p>
+        <p class="priceproductslist">Price of the article: ${Product.price / 100 + '.' + Product.price % 100} euros</p>
         <img class="imageproduct" src="${Product.imageUrl}">
         <p class="priceproductslist">Options for this article:</p>
-        <ul id="options" class="text-center"></ul>
-    </div>`
+        <div class="btn-group">
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Options
+        </button>
+        <div class="dropdown-menu" id="options">
+            
+            </div>
+        </div>`
             
             document.getElementById('productchoosen').innerHTML = HTMLProductlist;
             getoptions(Product)
@@ -44,7 +50,9 @@ function getoptions(Product) {
     let optionsection = document.getElementById("options");
    
     for (let i = 0; i < Product.lenses.length; i++) {
-        let newOption = document.createElement('p');
+        let newOption = document.createElement('a');
+        newOption.setAttribute('href', "#");
+        newOption.className = 'dropdown-item';
         newOption.innerText = Product.lenses[i];
 
         optionsection.append(newOption);
